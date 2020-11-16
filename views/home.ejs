@@ -1,0 +1,120 @@
+<html>
+    <head>
+
+        <title>
+            <%=title%>
+        </title>        
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+        <!-- font-awesome CDN and is specified above our own external stylesheet link so that the styles are overridden by our home.css file -->
+
+        <link rel="stylesheet" type="text/css" href="./css/home.css">
+        <!-- above is the relative(to assets folder, as we have specified the static folder for the assets using middleware) link to the external stylesheet -->
+
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <!-- meta tag for adjusting the content according to device width -->
+
+    </head>
+
+    <body>
+        
+        <!-- heading -->
+
+        <div id="heading">      
+            <i class="fas fa-address-book"></i>                 
+            <span>My Contact List</span>
+        </div>
+
+        <!-- contact list container -->
+       
+        <div id="contact-list">  
+
+            <!-- contact heading -->
+
+            <div id="contact-heading" class="contact-style">
+                <div>    
+                    <i class="fas fa-user-circle"></i>               
+                    <span>Name</span>
+                </div>
+
+                <div>
+                    <i class="fas fa-phone"></i>   
+                    <span>Phone Number</span>                    
+                </div>   
+            </div>  
+
+            <!-- contacts container -->
+
+            <div id="contacts">                
+                <%if(contact_list.length==0){%>
+
+                    <!-- message to show when there are no contacts inside the contact list -->
+
+                    <div id="no-contacts" class="contact-style">
+                        No contacts to show, go ahead and add some
+                    </div>
+                <%}%>
+
+                <%for(let i of contact_list){%>
+
+                    <!-- iterating over the contacts and filling their names and phone numbers as the dynamic content and each contact has certain custom attributes which are specificed for the purpose of displaying the selected contact -->
+
+                    <div class="contact contact-style" data-name="<%=i.name%>" data-phNo="<%=i.phNo%>">
+                        <div>
+                            <%=i.name%>
+                        </div>
+
+
+                        <div>
+                            <%=i.phNo%>
+                        </div>
+                        
+                        <!-- this is the link to delete a contact with a get request -->
+
+                        <a href="/delete-contact/?id=<%=i._id%>" class="delete-contact"><i class="fas fa-times"></i></a>
+
+                    </div>
+                <%}%>   
+            </div>       
+        </div>        
+
+        <!-- display selected contact -->
+
+        <div id="display-selected-contact">
+            <div>
+                <span>Selected Contact </span>
+                <i id="close" class="fas fa-times"></i> 
+            </div>
+
+            <div id="div1">
+            </div>        
+
+            <div id="div2">
+            </div>
+        </div>
+
+        <!-- add contact form -->
+
+        <div id="add-contact">
+
+            <!-- add contact heading -->
+
+            <div id="add-contact-heading">
+                Add a contact
+            </div>
+
+            <!-- create contact form which sends the post request to the "/create-contact" route -->
+        
+            <form action="/create-contact" method="POST" id="add-contact-form">
+                <input type="text" name="name" placeholder="Enter Name" required>
+                <input type="number" name="phNo" placeholder="Enter Phone Number" required>
+
+                <button type="submit">ADD</button>
+            </form>           
+        </div>
+            
+        <script type="text/javascript" src="/js/home.js"></script>
+        <!-- above is the relative(to assets folder) link to the external js file -->
+
+    </body>
+</html>
