@@ -1,0 +1,1 @@
+This contact list app provides you with the functionality to add, delete and select different contacts. To run this app, clone this repository, run the command - node index.js/nodemon index.js inside the terminal and then try accessing the localhost:8000/127.0.0.1:8000 url in your browser
